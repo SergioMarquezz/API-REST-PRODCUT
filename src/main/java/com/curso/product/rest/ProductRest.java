@@ -8,6 +8,7 @@ import com.curso.product.entity.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +48,14 @@ public class ProductRest {
 		
 		Product nuevoProducto = productoDao.save(producto);
 		return ResponseEntity.ok(nuevoProducto);
+		
+	}
+	
+	@DeleteMapping(value = "{idProducto}")
+	public ResponseEntity<Void> eliminarProducto(@PathVariable("idProducto")Long productoId) {
+		productoDao.deleteById(productoId);
+	
+		return ResponseEntity.ok(null);
 		
 	}
 }
