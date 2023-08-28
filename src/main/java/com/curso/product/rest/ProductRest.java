@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,6 +57,22 @@ public class ProductRest {
 		productoDao.deleteById(productoId);
 	
 		return ResponseEntity.ok(null);
+		
+	}
+	
+	@PutMapping
+	public ResponseEntity<Product> actualizarProducto(@RequestBody Product producto){
+		Optional<Product> productoOptional = productoDao.findById(producto.getIdProducto());
+		if(productoOptional.isPresent()) {
+			Product productoActualizado = productoOptional.get();
+			productoActualizado.setName(producto.getNameProducto());
+			productoDao.save(productoActualizado);
+			return ResponseEntity.ok(productoActualizado);
+		}
+		else {
+			return ResponseEntity.noContent().build();
+		}
+		
 		
 	}
 }
