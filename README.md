@@ -1,1 +1,2 @@
-# API-REST-PRODCUT
+# Servicios REST con Spring Boot
+##### Descripción: Se crea un CRUD de frutas utilizando Spring Boot y JPA para conexión a base datos. Este documento tiene como objetivo el poder estar actualizados en la tecnologia y saber lo que actualmente se puede ocupar y lo que ya esta deprecado.
