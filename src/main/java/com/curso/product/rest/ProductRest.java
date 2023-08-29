@@ -24,14 +24,14 @@ public class ProductRest {
 	@Autowired
 	private ProductsDao productoDao;
 	
-	@GetMapping
+	@GetMapping("/buscar")
 	public ResponseEntity<List<Product>> getProduct() {
 		
 		List<Product> productos = productoDao.findAll();
 		return ResponseEntity.ok(productos);
 	}
 	
-	@RequestMapping(value = "{idProducto}")
+	@RequestMapping(value = "buscar/{idProducto}")
 	public ResponseEntity<Product> getProductId(@PathVariable("idProducto")Long productoId) {
 		
 		Optional<Product> productoOptional = productoDao.findById(productoId);
@@ -52,7 +52,7 @@ public class ProductRest {
 		
 	}
 	
-	@DeleteMapping(value = "{idProducto}")
+	@DeleteMapping(value = "eliminar/{idProducto}")
 	public ResponseEntity<Void> eliminarProducto(@PathVariable("idProducto")Long productoId) {
 		productoDao.deleteById(productoId);
 	
@@ -60,7 +60,7 @@ public class ProductRest {
 		
 	}
 	
-	@PutMapping
+	@PutMapping("/actualizar")
 	public ResponseEntity<Product> actualizarProducto(@RequestBody Product producto){
 		Optional<Product> productoOptional = productoDao.findById(producto.getIdProducto());
 		if(productoOptional.isPresent()) {
